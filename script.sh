@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
+set -uo pipefail
 
+command -v xdg-open >/dev/null || { echo "xdg-open not found"; exit 1; }
 
-# --- e621: direct to posts, filtered to explicit, sorted so media shows first ---
+open() { xdg-open "$1" >/dev/null 2>&1 & sleep 0.4; }
+
+# --- e621: random explicit posts, 10 distinct random draws ---
 E621="https://e621.net/posts?tags=order%3Arandom+rating%3Ae"
-# 10 e621 tabs, each a different random page so you don't get identical results
-for i in $(seq 1 10); do
-    xdg-open "${E621}&page=$i" >/dev/null 2>&1 &
+for _ in $(seq 1 10); do
+    open "$E621"
 done
 
-# --- video sites: direct to browse/trending video pages ---
+# --- video sites: trending/best pages ---
 VIDEO_SITES=(
     "https://www.pornhub.com/video?o=tr"
     "https://www.xvideos.com/best"
@@ -16,16 +19,16 @@ VIDEO_SITES=(
     "https://www.redtube.com/bestnew"
     "https://www.youporn.com/browse/trending/"
     "https://www.eporner.com/0/1/"
-    "https://www.spankbang.com/trending"
+    "https://www.spankbang.com/trending/"
     "https://www.tube8.com/trending/"
     "https://www.txxx.com/latest-updates/"
     "https://www.beeg.com/trending"
 )
 for url in "${VIDEO_SITES[@]}"; do
-    xdg-open "$url" >/dev/null 2>&1 &
+    open "$url"
 done
 
-# --- image galleries: direct to gallery/album listings, not homepages ---
+# --- image galleries: gallery/album listings ---
 IMAGE_SITES=(
     "https://www.imagefap.com/gallery.php?type=0"
     "https://www.pixiv.net/en/tags/R-18/artworks"
@@ -39,5 +42,5 @@ IMAGE_SITES=(
     "https://www.furaffinity.net/browse/all/?rating=2"
 )
 for url in "${IMAGE_SITES[@]}"; do
-    xdg-open "$url" >/dev/null 2>&1 &
+    open "$url"
 done
