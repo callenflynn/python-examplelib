@@ -2,71 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Furry Video Wall</title>
+<title>Furry Tab Bomb</title>
 <style>
   body {
     background: #0d0d0d;
     color: #eee;
     font-family: system-ui, sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
-  h1 { text-align: center; font-size: 1.6rem; margin: 0 0 20px; }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 16px;
-  }
-  .cell {
-    background: #1a1a1a;
-    border-radius: 10px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
   }
-  .cell iframe {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: 0;
-    background: #000;
+  h1 { font-size: 2rem; margin: 0 0 10px; }
+  p { color: #888; max-width: 420px; }
+  button {
+    margin-top: 24px;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
   }
-  .label {
-    padding: 8px 12px;
-    font-size: 0.8rem;
-    color: #999;
-  }
-  .label a { color: #6cf; text-decoration: none; }
 </style>
 </head>
 <body>
-<h1>10 furry videos — sound on, one tab</h1>
-<div class="grid" id="grid"></div>
+<h1>11 furry tabs incoming.</h1>
+<p>Browsers block most popups on page load — if they didn't all open, click below.</p>
+<button onclick="bomb()">Open all 11</button>
 
 <script>
-// Each entry: [site name, embed URL, source page URL]
-const VIDS = [
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
-  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"]
+const TARGETS = [
+  "https://www.pornhub.com/view_video.php?viewkey=6ac6a163c2b06",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom",
+  "https://e621.net/posts?tags=type%3Awebm+gay+order%3Arandom"
 ];
 
-const grid = document.getElementById("grid");
-VIDS.forEach(([name, embed, src]) => {
-  const cell = document.createElement("div");
-  cell.className = "cell";
-  cell.innerHTML = `
-    <iframe src="${embed}" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-    <div class="label">${name} — <a href="${src}" target="_blank">open source</a></div>
-  `;
-  grid.appendChild(cell);
-});
+function bomb() {
+  TARGETS.forEach(url => window.open(url, "_blank"));
+}
+
+window.addEventListener("load", bomb);
 </script>
 </body>
 </html>
