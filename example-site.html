@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Furry Video Wall</title>
+<style>
+  body {
+    background: #0d0d0d;
+    color: #eee;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 { text-align: center; font-size: 1.6rem; margin: 0 0 20px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .cell {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .cell iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: #000;
+  }
+  .label {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    color: #999;
+  }
+  .label a { color: #6cf; text-decoration: none; }
+</style>
+</head>
+<body>
+<h1>10 furry videos — sound on, one tab</h1>
+<div class="grid" id="grid"></div>
+
+<script>
+// Each entry: [site name, embed URL, source page URL]
+const VIDS = [
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"],
+  ["e621", "https://e621.net/posts/embed", "https://e621.net/posts"]
+];
+
+const grid = document.getElementById("grid");
+VIDS.forEach(([name, embed, src]) => {
+  const cell = document.createElement("div");
+  cell.className = "cell";
+  cell.innerHTML = `
+    <iframe src="${embed}" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+    <div class="label">${name} — <a href="${src}" target="_blank">open source</a></div>
+  `;
+  grid.appendChild(cell);
+});
+</script>
+</body>
+</html>
